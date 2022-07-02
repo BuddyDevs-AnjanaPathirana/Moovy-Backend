@@ -1,0 +1,19 @@
+{
+  "name": "moovy-backend",
+  "version": "1.0.0",
+  "description": "A movie rental application build using MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BuddyDevs-AnjanaPathirana/Moovy-Backend.git"
+  },
+  "author": "Anjana Pathirana @BuddyDevs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BuddyDevs-AnjanaPathirana/Moovy-Backend/issues"
+  },
+  "homepage": "https://github.com/BuddyDevs-AnjanaPathirana/Moovy-Backend#readme"
+}
