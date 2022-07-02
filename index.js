@@ -1,5 +1,5 @@
 const express = require('express');
-const Joi = require('joi')
+const Joi = require('joi');
 const app = express();
 
 app.use(express.json())
@@ -31,8 +31,7 @@ app.get('/api/genres/:id', (req, res) => {
 app.post('/api/genres', (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) {
-        res.status(400).send(error.details[0].message);
-        return;
+        return res.status(400).send(error.details[0].message);
     }
 
     const genre = {
@@ -45,27 +44,27 @@ app.post('/api/genres', (req, res) => {
 
 //Updating a genre
 
-app.put('/api/genres:id', (req, res) => {
-    const genre = genre.find(genre => genre.id === parseInt(req.params.id));
-    if (!genre) return res.status(404).send('Genre with the given ID was not found');
+app.put('/api/genres/:id', (req, res) => {
+    const genre = genres.find(genre => genre.id === parseInt(req.params.id));
+    if (!genre) res.status(404).send('Genre with the given ID was not found');
 
     const { error } = validateGenre(req.body);
     if (error) {
-        res.status(400).send(error.details[0].message);
-        return;
+        return res.status(400).send(error.details[0].message);
+
     }
 
     genre.name = req.body.name;
-    res.send.genre;
-})
+    res.send(genre);
+});
 
 function validateGenre(genre) {
     const schema = {
         name: Joi.string().min(3).required()
-    }
+    };
 
     return Joi.validate(genre, schema)
 }
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}...`))
+app.listen(port, () => console.log(`Listening on port ${port}...`));
