@@ -10,7 +10,7 @@ const genres = [
     { id: 3, name: 'Romance' }
 ]
 
-//Genres API
+//#########################################################  Genres API  #########################################################
 
 //Getting all genres 
 
@@ -58,6 +58,20 @@ app.put('/api/genres/:id', (req, res) => {
     res.send(genre);
 });
 
+//Delete a genre
+
+app.delete('/api/genres/:id', (req, res) => {
+    const genre = genres.find(genre => genre.id === parseInt(req.params.id))
+    if (!genre) res.status(404).send('Genre with the given ID was not found')
+
+    const index = genres.indexOf(genre)
+    genres.splice(index, 1);
+
+    res.send(genre);
+})
+
+//Validate genre using Joi
+
 function validateGenre(genre) {
     const schema = {
         name: Joi.string().min(3).required()
@@ -65,6 +79,8 @@ function validateGenre(genre) {
 
     return Joi.validate(genre, schema)
 }
+
+//Define environmental variables
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
