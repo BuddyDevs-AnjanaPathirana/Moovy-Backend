@@ -18,6 +18,6 @@
   "homepage": "https://github.com/BuddyDevs-AnjanaPathirana/Moovy-Backend#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "joi": "^17.6.0"
+    "joi": "^13.1.0"
   }
 }
