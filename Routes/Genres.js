@@ -11,13 +11,13 @@ const genres = [
 
 //Getting all genres 
 
-router.get('/api/genres', (req, res) => {
+router.get('/', (req, res) => {
     res.send(genres);
 })
 
 //Getting genre with a id
 
-router.get('/api/genres/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const genre = genres.find(genre => genre.id === parseInt(req.params.id));
     if (!genre) res.status(404).send('Genre with the given ID was not found');
     res.send(genre);
@@ -25,7 +25,7 @@ router.get('/api/genres/:id', (req, res) => {
 
 //Creating a new genre
 
-router.post('/api/genres', (req, res) => {
+router.post('/', (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
@@ -41,7 +41,7 @@ router.post('/api/genres', (req, res) => {
 
 //Updating a genre
 
-router.put('/api/genres/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const genre = genres.find(genre => genre.id === parseInt(req.params.id));
     if (!genre) res.status(404).send('Genre with the given ID was not found');
 
@@ -57,7 +57,7 @@ router.put('/api/genres/:id', (req, res) => {
 
 //Delete a genre
 
-router.delete('/api/genres/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const genre = genres.find(genre => genre.id === parseInt(req.params.id))
     if (!genre) res.status(404).send('Genre with the given ID was not found')
 
