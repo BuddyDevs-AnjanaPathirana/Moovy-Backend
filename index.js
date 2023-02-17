@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const genres = require("./Routes/Genres");
 const customers = require("./Routes/Customers");
+const movies = require("./Routes/Movies");
 
 mongoose
   .connect("mongodb://127.0.0.1/moovy")
@@ -12,6 +13,7 @@ mongoose
 app.use(express.json());
 app.use("/api/genres", genres);
 app.use("/api/customers", customers);
+app.use("/api/movies", movies);
 
 //Define environmental variables
 
