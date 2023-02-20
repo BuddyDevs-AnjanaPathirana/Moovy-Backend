@@ -18,7 +18,9 @@
   "homepage": "https://github.com/BuddyDevs-AnjanaPathirana/Moovy-Backend#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "fawn": "^2.1.5",
     "joi": "^13.1.0",
+    "joi-objectid": "^4.0.2",
     "mongoose": "^6.9.1"
   },
   "devDependencies": {
