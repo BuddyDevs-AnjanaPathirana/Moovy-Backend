@@ -1,4 +1,4 @@
-const express = require("express"); //Check apis of rentals
+const express = require("express");
 const router = express.Router();
 const { Rental, validate } = require("../Models/Rental");
 const { Customer } = require("../Models/Customer");
