@@ -8,6 +8,7 @@ const customers = require("./Routes/Customers");
 const movies = require("./Routes/Movies");
 const rentals = require("./Routes/Rentals");
 const users = require("./Routes/Users");
+const auth = require("./Routes/auth");
 
 mongoose
   .connect("mongodb://127.0.0.1/moovy")
@@ -20,6 +21,7 @@ app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 //Define environmental variables
 
