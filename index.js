@@ -1,9 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
-// const config = require("config");
 const genres = require("./Routes/Genres");
 const customers = require("./Routes/Customers");
 const movies = require("./Routes/Movies");
@@ -11,10 +11,10 @@ const rentals = require("./Routes/Rentals");
 const users = require("./Routes/Users");
 const auth = require("./Routes/auth");
 
-/*if (!config.get("jwtPrivateKey")) {
-  console.error("FATAL ERROR: jwtPrivateKey is not defined");
-  process.exit(1); //exit() => success      exit(1 or any other thing) => exit the process in case of a failure
-}*/
+if (!process.env.JWT_PRIVATE_KEY) {
+  console.error("FATAL ERROR: JWT_PRIVATE_KEY is not defined");
+  process.exit(1);
+}
 mongoose
   .connect("mongodb://127.0.0.1/moovy")
   .then(() => console.log("Connected to mongodb..."))
@@ -30,5 +30,5 @@ app.use("/api/auth", auth);
 
 //Define environmental variables
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
