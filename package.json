@@ -17,7 +17,18 @@
   },
   "homepage": "https://github.com/BuddyDevs-AnjanaPathirana/Moovy-Backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "config": "^3.3.9",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
-    "joi": "^13.1.0"
+    "fawn": "^2.1.5",
+    "joi": "^13.1.0",
+    "joi-objectid": "^4.0.2",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.9.1"
+  },
+  "devDependencies": {
+    "@types/joi": "^17.2.3"
   }
 }
