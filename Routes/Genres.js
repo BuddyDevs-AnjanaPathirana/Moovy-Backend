@@ -8,9 +8,13 @@ const router = express.Router();
 
 //Getting all genres
 
-router.get("/", async (req, res) => {
-  const genres = await Genre.find().sort("name");
-  res.send(genres);
+router.get("/", async (req, res, next) => {
+  try {
+    const genres = await Genre.find().sort("name");
+    res.send(genres);
+  } catch (ex) {
+    next(ex);
+  }
 });
 
 //Getting genre with a id
