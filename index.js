@@ -1,4 +1,6 @@
+require("express-async-errors");
 require("dotenv").config();
+const winston = require("winston");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -10,6 +12,9 @@ const movies = require("./Routes/Movies");
 const rentals = require("./Routes/Rentals");
 const users = require("./Routes/Users");
 const auth = require("./Routes/auth");
+const error = require("./Middleware/error");
+
+winston.add(new winston.transports.File({ filename: "logfile.log" }));
 
 if (!process.env.JWT_PRIVATE_KEY) {
   console.error("FATAL ERROR: JWT_PRIVATE_KEY is not defined");
@@ -27,6 +32,7 @@ app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use(error);
 
 //Define environmental variables
 
