@@ -1,6 +1,7 @@
 require("express-async-errors");
 require("dotenv").config();
 const winston = require("winston");
+require("winston-mongodb");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -14,7 +15,25 @@ const users = require("./Routes/Users");
 const auth = require("./Routes/auth");
 const error = require("./Middleware/error");
 
+winston.exceptions.handle(
+  new winston.transports.File({ filename: "uncaughtExceptions.log" })
+);
+
+process.on("unhandledRejection", (ex) => {
+  throw ex;
+});
+
 winston.add(new winston.transports.File({ filename: "logfile.log" }));
+winston.add(
+  new winston.transports.MongoDB({ db: "mongodb://127.0.0.1/moovy" })
+);
+
+// const p = Promise.reject(new Error("Something failed miserably"));
+// p.then(() => {
+//   console.log("Done");
+// });
+
+// throw new Error("Failed in startup");
 
 if (!process.env.JWT_PRIVATE_KEY) {
   console.error("FATAL ERROR: JWT_PRIVATE_KEY is not defined");
