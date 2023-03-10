@@ -4,7 +4,7 @@
   "description": "A movie rental application build using MERN stack",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll "
+    "test": "jest --watchAll --verbose "
   },
   "repository": {
     "type": "git",
