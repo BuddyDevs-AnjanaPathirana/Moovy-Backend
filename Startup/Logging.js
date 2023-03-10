@@ -1,5 +1,5 @@
 const winston = require("winston");
-require("winston-mongodb");
+// require("winston-mongodb");
 require("express-async-errors");
 
 module.exports = () => {
@@ -11,9 +11,9 @@ module.exports = () => {
     throw ex;
   });
 
-  winston.add(new winston.transports.File({ filename: "logfile.log" }));
-  winston.add(
-    new winston.transports.MongoDB({ db: "mongodb://127.0.0.1/moovy" })
-  );
-  winston.add(new winston.transports.Console());
+  // winston.add(new winston.transports.File({ filename: "logfile.log" }));
+  // winston.add(
+  //   new winston.transports.MongoDB({ db: "mongodb://127.0.0.1/moovy" })
+  // );
+  // winston.add(new winston.transports.Console());
 };
