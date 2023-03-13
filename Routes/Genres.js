@@ -2,6 +2,7 @@ const auth = require("../Middleware/auth");
 const isAdmin = require("../Middleware/isAdmin");
 const { Genre, validate } = require("../Models/Genre");
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 
 //###################################  Genres API  ###################################
@@ -17,6 +18,9 @@ router.get("/", async (req, res) => {
 //Getting genre with a id
 
 router.get("/:id", async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(404).send("Invalid id");
+
   const genre = await Genre.findById(req.params.id);
 
   if (!genre) res.status(404).send("Genre with the given ID was not found");
