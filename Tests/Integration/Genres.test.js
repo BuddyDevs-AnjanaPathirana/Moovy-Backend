@@ -1,5 +1,7 @@
 const request = require("supertest");
 const { Genre } = require("../../Models/Genre");
+const { User } = require("../../Models/User");
+const mongoose = require("mongoose");
 
 let server;
 
@@ -43,6 +45,67 @@ describe("/api/genres", () => {
       const res = await request(server).get("/api/genres/1");
 
       expect(res.status).toBe(404);
+    });
+  });
+  describe("POST /", () => {
+    it("should return 401 if client is not logged in", async () => {
+      const res = await request(server)
+        .post("/api/genres")
+        .send({ name: "genre1" });
+      expect(res.status).toBe(401);
+    });
+
+    it("should return 400 if genre is less than 5 characters", async () => {
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("X-Auth-Token", token)
+        .send({ name: "g1" });
+      expect(res.status).toBe(400);
+    });
+
+    it("should return 400 if genre is longer than 50 characters", async () => {
+      const token = new User().generateAuthToken();
+
+      const name = new Array(52).join("a");
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("X-Auth-Token", token)
+        .send({
+          name: name,
+        });
+      expect(res.status).toBe(400);
+    });
+
+    it("should save the genre if it is valid", async () => {
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("X-Auth-Token", token)
+        .send({
+          name: "genre1",
+        });
+
+      const genre = await Genre.find({ name: "genre1" });
+
+      expect(genre).not.toBeNull();
+    });
+
+    it("should return genre if it is valid", async () => {
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/api/genres")
+        .set("X-Auth-Token", token)
+        .send({
+          name: "genre1",
+        });
+
+      expect(res.body).toHaveProperty("_id");
+      expect(res.body).toHaveProperty("name", "genre1");
     });
   });
 });
